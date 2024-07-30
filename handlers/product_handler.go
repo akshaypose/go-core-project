@@ -20,11 +20,6 @@ type APIResponse struct {
 }
 
 func GetAllProducts(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	body, err := utils.MakeCurlCall("https://dummyjson.com/products")
 	if err != nil {
 		http.Error(w, "Failed to make API call", http.StatusInternalServerError)
@@ -46,11 +41,6 @@ func GetAllProducts(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetProductByID(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	id := r.PathValue("id")
 	body, err := utils.MakeCurlCall("https://dummyjson.com/products/" + id)
 	if err != nil {
